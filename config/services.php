@@ -42,6 +42,24 @@ return [
         'server_key' => env('MIDTRANS_SERVER_KEY'),
     ],
 
+    'marketplaces' => [
+        'gofood' => [
+            'client_id' => env('GOFOOD_CLIENT_ID'),
+            'client_secret' => env('GOFOOD_CLIENT_SECRET'),
+            'production' => env('GOFOOD_PRODUCTION', false),
+        ],
+        'shopee_food' => [
+            'client_id' => env('SHOPEE_FOOD_CLIENT_ID'),
+            'client_secret' => env('SHOPEE_FOOD_CLIENT_SECRET'),
+            'production' => env('SHOPEE_FOOD_PRODUCTION', false),
+        ],
+        'grab_food' => [
+            'client_id' => env('GRAB_FOOD_CLIENT_ID'),
+            'client_secret' => env('GRAB_FOOD_CLIENT_SECRET'),
+            'production' => env('GRAB_FOOD_PRODUCTION', false),
+        ],
+    ],
+
     'slack' => [
         'notifications' => [
             'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),

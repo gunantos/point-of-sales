@@ -15,10 +15,31 @@ class PaymentSetting extends Model
 
     public const GATEWAY_BANK_TRANSFER = 'bank_transfer';
 
+    public const GATEWAY_GOFOOD = 'gofood';
+
+    public const GATEWAY_SHOPEE_FOOD = 'shopee_food';
+
+    public const GATEWAY_GRAB_FOOD = 'grab_food';
+
+    public const MARKETPLACE_FIELDS = [
+        'gofood_enabled',
+        'shopee_food_enabled',
+        'grab_food_enabled',
+        'gofood_client_id',
+        'shopee_food_client_id',
+        'grab_food_client_id',
+        'gofood_sync_products',
+        'shopee_food_sync_products',
+        'grab_food_sync_products',
+    ];
+
     public const SECRET_FIELDS = [
         'midtrans_server_key',
         'xendit_secret_key',
         'xendit_callback_token',
+        'gofood_client_id',
+        'shopee_food_client_id',
+        'grab_food_client_id',
     ];
 
     protected $fillable = [
@@ -34,6 +55,18 @@ class PaymentSetting extends Model
         'xendit_public_key',
         'xendit_callback_token',
         'xendit_production',
+        'gofood_enabled',
+        'shopee_food_enabled',
+        'grab_food_enabled',
+        'gofood_client_id',
+        'shopee_food_client_id',
+        'grab_food_client_id',
+        'gofood_sync_products',
+        'shopee_food_sync_products',
+        'grab_food_sync_products',
+        'gofood_production',
+        'shopee_food_production',
+        'grab_food_production',
     ];
 
     protected $casts = [
@@ -45,7 +78,20 @@ class PaymentSetting extends Model
         'xendit_production' => 'boolean',
         'midtrans_server_key' => 'encrypted',
         'xendit_secret_key' => 'encrypted',
+        'xendit_public_key' => 'encrypted',
         'xendit_callback_token' => 'encrypted',
+        'gofood_enabled' => 'boolean',
+        'shopee_food_enabled' => 'boolean',
+        'grab_food_enabled' => 'boolean',
+        'gofood_client_id' => 'string',
+        'shopee_food_client_id' => 'string',
+        'grab_food_client_id' => 'string',
+        'gofood_sync_products' => 'boolean',
+        'shopee_food_sync_products' => 'boolean',
+        'grab_food_sync_products' => 'boolean',
+        'gofood_production' => 'boolean',
+        'shopee_food_production' => 'boolean',
+        'grab_food_production' => 'boolean',
     ];
 
     public static function forOutlet(?Outlet $outlet): ?self
@@ -155,6 +201,36 @@ class PaymentSetting extends Model
             'public_key' => $this->xendit_public_key,
             'callback_token' => $this->resolvedSecret('xendit_callback_token'),
             'is_production' => $this->xendit_production,
+        ];
+    }
+
+    public function gofoodConfig(): array
+    {
+        return [
+            'enabled' => $this->gofood_enabled,
+            'client_id' => $this->gofood_client_id,
+            'client_secret' => $this->resolvedSecret('gofood_client_id'),
+            'is_production' => $this->gofood_production ?? env('GOFOOD_PRODUCTION', false),
+        ];
+    }
+
+    public function shopeeFoodConfig(): array
+    {
+        return [
+            'enabled' => $this->shopee_food_enabled,
+            'client_id' => $this->shopee_food_client_id,
+            'client_secret' => $this->resolvedSecret('shopee_food_client_id'),
+            'is_production' => $this->shopee_food_production ?? env('SHOPEE_FOOD_PRODUCTION', false),
+        ];
+    }
+
+    public function grabFoodConfig(): array
+    {
+        return [
+            'enabled' => $this->grab_food_enabled,
+            'client_id' => $this->grab_food_client_id,
+            'client_secret' => $this->resolvedSecret('grab_food_client_id'),
+            'is_production' => $this->grab_food_production ?? env('GRAB_FOOD_PRODUCTION', false),
         ];
     }
 

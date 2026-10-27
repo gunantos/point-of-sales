@@ -26,6 +26,13 @@ Route::prefix('webhooks')->group(function () {
     Route::post('/xendit', [PaymentWebhookController::class, 'xendit'])->name('webhooks.xendit');
 });
 
+// Marketplace webhooks (no auth, signature verified per platform)
+Route::prefix('webhooks')->group(function () {
+    Route::post('/gofood', [\App\Http\Controllers\Api\MarketplaceWebhookController::class, 'gofood'])->name('webhooks.gofood');
+    Route::post('/shopee-food', [\App\Http\Controllers\Api\MarketplaceWebhookController::class, 'shopeeFood'])->name('webhooks.shopee-food');
+    Route::post('/grab-food', [\App\Http\Controllers\Api\MarketplaceWebhookController::class, 'grabFood'])->name('webhooks.grab-food');
+});
+
 Route::prefix('v1')->group(function () {
     // Auth (public)
     Route::prefix('auth')->group(function () {
