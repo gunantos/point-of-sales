@@ -32,6 +32,7 @@ Sistem kasir berbasis Laravel + Inertia + React untuk transaksi penjualan, inven
 - PPN 11% (exclusive/inclusive)
 - Thermal printer support (WebUSB)
 - Offline mode (queue transaksi saat offline, sync saat online)
+- **Marketplace Integration** - sinkron produk ke GoFood/ShopeeFood/GrabFood, terima order dari platform, tracking di dashboard
 
 ### Inventory & Multi-Warehouse
 - Manajemen produk + kategori + barcode
@@ -82,6 +83,7 @@ Sistem kasir berbasis Laravel + Inertia + React untuk transaksi penjualan, inven
 ### Integrasi
 - **WhatsApp Gateway** — terhubung via Node.js service (`whatsapp-service/`)
 - **Payment Gateways** — Midtrans, Xendit
+- **Marketplace Integration** — GoFood, ShopeeFood, GrabFood ( sinkron produk + terima order )
 
 ---
 
